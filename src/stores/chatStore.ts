@@ -12,7 +12,7 @@ interface ChatStore {
   // Actions
   createConversation: (model: string) => string;
   setActiveConversation: (id: string) => void;
-  addMessage: (conversationId: string, message: Omit<Message, 'id' | 'timestamp'>) => void;
+  addMessage: (conversationId: string, message: Omit<Message, 'id' | 'timestamp'>) => string;
   updateMessage: (conversationId: string, messageId: string, content: string) => void;
   updateMessageStreaming: (conversationId: string, messageId: string, isStreaming: boolean) => void;
   deleteConversation: (id: string) => void;
@@ -79,6 +79,8 @@ export const useChatStore = create<ChatStore>()(
             return conv;
           }),
         }));
+
+        return message.id;
       },
 
       updateMessage: (conversationId: string, messageId: string, content: string) => {
