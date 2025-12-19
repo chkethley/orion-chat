@@ -1,7 +1,7 @@
 use serde_json::Value;
 use tauri::State;
 
-use crate::mcp::{CallToolResult, McpServerConfig, McpServerManager, McpTool, OpenAITool};
+use crate::mcp::{CallToolResult, McpServerConfig, McpServerManager, OpenAITool};
 
 /// Start a new MCP server
 #[tauri::command]

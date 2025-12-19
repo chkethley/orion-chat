@@ -6,7 +6,6 @@ import { useMcpStore } from '@/stores/mcpStore';
 import { getOpenRouterService } from '@/services/openrouter';
 import type { OpenRouterMessage } from '@/types/openrouter';
 import type { ToolCall, ToolResult } from '@/types/chat';
-import { nanoid } from 'nanoid';
 
 export function useStreaming() {
   const addMessage = useChatStore((state) => state.addMessage);
@@ -47,6 +46,8 @@ export function useStreaming() {
       // Create abort controller
       abortControllerRef.current = new AbortController();
 
+      let assistantMessageId: string | null = null;
+
       try {
         setStreaming(true);
         setError(null);
@@ -71,16 +72,45 @@ export function useStreaming() {
         const service = getOpenRouterService(apiKey);
 
         // Create assistant message placeholder
-        const assistantMessageId = nanoid();
-        addMessage(conversationId, {
+        assistantMessageId = addMessage(conversationId, {
           role: 'assistant',
           content: '',
           isStreaming: true,
           model: selectedModel,
         });
 
-        // Track the assistant message ID (it will be the last message)
+        if (!assistantMessageId) {
+          setStreaming(false);
+          return;
+        }
+
+        const messageId = assistantMessageId;
+
         let accumulatedContent = '';
+        let pendingUpdate: number | null = null;
+        let lastUpdateAt = 0;
+        const updateIntervalMs = 60;
+
+        const flushUpdate = () => {
+          if (pendingUpdate !== null) {
+            window.clearTimeout(pendingUpdate);
+            pendingUpdate = null;
+          }
+          lastUpdateAt = Date.now();
+          updateMessage(conversationId, messageId, accumulatedContent);
+        };
+
+        const scheduleUpdate = () => {
+          if (pendingUpdate !== null) return;
+
+          const now = Date.now();
+          const delay = Math.max(0, updateIntervalMs - (now - lastUpdateAt));
+          pendingUpdate = window.setTimeout(() => {
+            pendingUpdate = null;
+            lastUpdateAt = Date.now();
+            updateMessage(conversationId, messageId, accumulatedContent);
+          }, delay);
+        };
 
         // Stream the response
         await service.streamChat(
@@ -90,16 +120,7 @@ export function useStreaming() {
             onContent: (content: string) => {
               accumulatedContent += content;
 
-              // Find the assistant message and update it
-              const currentConversation = useChatStore.getState().conversations.find(
-                (c) => c.id === conversationId
-              );
-              if (currentConversation) {
-                const lastMessage = currentConversation.messages[currentConversation.messages.length - 1];
-                if (lastMessage && lastMessage.role === 'assistant') {
-                  updateMessage(conversationId, lastMessage.id, accumulatedContent);
-                }
-              }
+              scheduleUpdate();
             },
             onToolCall: async (toolCall: any) => {
               try {
@@ -140,20 +161,18 @@ export function useStreaming() {
               }
             },
             onComplete: () => {
+              flushUpdate();
               // Mark streaming as complete
-              const currentConversation = useChatStore.getState().conversations.find(
-                (c) => c.id === conversationId
-              );
-              if (currentConversation) {
-                const lastMessage = currentConversation.messages[currentConversation.messages.length - 1];
-                if (lastMessage && lastMessage.role === 'assistant') {
-                  updateMessageStreaming(conversationId, lastMessage.id, false);
-                }
-              }
+              updateMessageStreaming(conversationId, messageId, false);
               setStreaming(false);
             },
             onError: (error: Error) => {
+              if (pendingUpdate !== null) {
+                window.clearTimeout(pendingUpdate);
+                pendingUpdate = null;
+              }
               setError(error.message);
+              updateMessageStreaming(conversationId, messageId, false);
               setStreaming(false);
             },
             signal: abortControllerRef.current.signal,
@@ -163,6 +182,9 @@ export function useStreaming() {
       } catch (error) {
         if (error instanceof Error && error.message !== 'Request aborted') {
           setError(error.message);
+        }
+        if (assistantMessageId) {
+          updateMessageStreaming(conversationId, assistantMessageId, false);
         }
         setStreaming(false);
       }

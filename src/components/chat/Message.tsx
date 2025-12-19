@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { User, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
@@ -8,7 +9,7 @@ interface MessageProps {
   message: MessageType;
 }
 
-export function Message({ message }: MessageProps) {
+export const Message = memo(function Message({ message }: MessageProps) {
   const isUser = message.role === 'user';
 
   return (
@@ -55,15 +56,17 @@ export function Message({ message }: MessageProps) {
             {message.content}
           </div>
         ) : (
-          // Assistant messages: markdown rendering
+          // Assistant messages: render markdown once streaming completes
           <div>
             {message.content ? (
-              <>
-                <MarkdownRenderer content={message.content} />
-                {message.isStreaming && (
+              message.isStreaming ? (
+                <div className="whitespace-pre-wrap break-words">
+                  {message.content}
                   <span className="ml-1 inline-block h-4 w-1 animate-pulse bg-current" />
-                )}
-              </>
+                </div>
+              ) : (
+                <MarkdownRenderer content={message.content} />
+              )
             ) : message.isStreaming ? (
               <TypingIndicator />
             ) : null}
@@ -79,4 +82,4 @@ export function Message({ message }: MessageProps) {
       </div>
     </div>
   );
-}
+});
