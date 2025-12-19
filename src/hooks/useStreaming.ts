@@ -167,10 +167,7 @@ export function useStreaming() {
               setStreaming(false);
             },
             onError: (error: Error) => {
-              if (pendingUpdate !== null) {
-                window.clearTimeout(pendingUpdate);
-                pendingUpdate = null;
-              }
+              flushUpdate();
               setError(error.message);
               updateMessageStreaming(conversationId, messageId, false);
               setStreaming(false);
