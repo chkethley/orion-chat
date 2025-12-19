@@ -28,6 +28,34 @@ Orion is a modern, feature-rich AI chat application that brings the power of mul
 
 ---
 
+## Screenshots
+
+<div align="center">
+
+### Main Chat Interface
+![Orion Main Interface](assets/screenshots/main-interface.png)
+*Clean, modern chat interface with sidebar navigation, model selector, and real-time streaming responses*
+
+### Model Selection
+![Model Selector](assets/screenshots/model-selector.png)
+*Browse and search 100+ AI models with detailed information about providers, context windows, and pricing*
+
+### MCP Server Management
+![MCP Servers](assets/screenshots/mcp-servers.png)
+*Manage MCP servers with visual status indicators and one-click start/stop controls*
+
+### Smithery Marketplace
+![Smithery Browser](assets/screenshots/smithery-browser.png)
+*Browse and install MCP servers from the Smithery marketplace with search and filtering*
+
+### Settings & Configuration
+![Settings Dialog](assets/screenshots/settings.png)
+*Configure API keys, select models, and manage MCP servers all in one place*
+
+</div>
+
+---
+
 ## Features
 
 ### 🤖 AI Model Support
