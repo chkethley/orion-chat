@@ -118,7 +118,7 @@ export function Sidebar() {
     <div className="flex h-full flex-col gap-4 rounded-3xl border border-white/5 bg-gradient-to-b from-white/10 via-[#0f192c]/80 to-[#0b101c]/90 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl">
       <div className="flex items-center justify-between rounded-2xl border border-white/5 bg-white/5 px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/80 via-primary to-[#4ae0d0] text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_rgba(61,210,195,0.45)]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/80 via-primary to-[#2de2a6] text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_rgba(74,163,255,0.45)]">
             OR
           </div>
           <div>
@@ -131,7 +131,7 @@ export function Sidebar() {
       {/* New Chat Button */}
       <Button
         onClick={handleNewChat}
-        className="w-full bg-gradient-to-r from-primary via-[#45e3d2] to-[#f8bf6b] text-sm font-semibold text-[#051510] shadow-[0_12px_45px_rgba(61,210,195,0.45)] hover:brightness-110 border-none"
+        className="w-full bg-gradient-to-r from-primary via-[#78beff] to-[#2de2a6] text-sm font-semibold text-[#061a2c] shadow-[0_12px_45px_rgba(74,163,255,0.45)] hover:brightness-110 border-none"
       >
         <Plus className="mr-2 h-4 w-4" />
         New Chat
@@ -180,7 +180,7 @@ export function Sidebar() {
                     'group relative flex flex-col gap-1 rounded-xl border border-white/5 bg-white/5 px-3 py-3 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/5',
                     editingId !== conversation.id && 'cursor-pointer',
                     activeConversationId === conversation.id &&
-                      'border-primary/50 bg-primary/10 shadow-[0_15px_40px_rgba(61,210,195,0.25)]'
+                      'border-primary/50 bg-primary/10 shadow-[0_15px_40px_rgba(74,163,255,0.25)]'
                   )}
                 >
                   {editingId === conversation.id ? (

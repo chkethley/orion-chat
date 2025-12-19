@@ -11,9 +11,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Eye, EyeOff, ExternalLink, Plus } from 'lucide-react';
+import { Eye, EyeOff, ExternalLink, Plus, Globe } from 'lucide-react';
 import { McpServerList } from '@/components/mcp/McpServerList';
 import { McpServerDialog } from '@/components/mcp/McpServerDialog';
+import { SmitheryBrowseDialog } from '@/components/mcp/SmitheryBrowseDialog';
 
 interface SettingsDialogProps {
   open: boolean;
@@ -29,6 +30,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showMcpDialog, setShowMcpDialog] = useState(false);
+  const [showSmitheryDialog, setShowSmitheryDialog] = useState(false);
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -139,15 +141,26 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <Label>MCP Servers</Label>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowMcpDialog(true)}
-                className="h-8"
-              >
-                <Plus className="h-4 w-4 mr-1" />
-                Add Server
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowSmitheryDialog(true)}
+                  className="h-8"
+                >
+                  <Globe className="h-4 w-4 mr-1" />
+                  Browse Smithery
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowMcpDialog(true)}
+                  className="h-8"
+                >
+                  <Plus className="h-4 w-4 mr-1" />
+                  Add Manually
+                </Button>
+              </div>
             </div>
 
             <div className="rounded-md border border-border bg-muted/20 h-[200px]">
@@ -160,6 +173,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
           </div>
 
           <McpServerDialog open={showMcpDialog} onOpenChange={setShowMcpDialog} />
+          <SmitheryBrowseDialog open={showSmitheryDialog} onOpenChange={setShowSmitheryDialog} />
         </div>
 
         {/* Actions */}

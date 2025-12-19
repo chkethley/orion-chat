@@ -96,13 +96,41 @@ pub struct ServerInfo {
     pub version: String,
 }
 
-/// MCP tool definition
+/// MCP tool definition (native MCP format)
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McpTool {
     pub name: String,
     pub description: String,
     #[serde(rename = "inputSchema")]
     pub input_schema: Value,
+}
+
+/// OpenAI-compatible tool format for LLM APIs
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct OpenAITool {
+    #[serde(rename = "type")]
+    pub tool_type: String,
+    pub function: OpenAIFunction,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct OpenAIFunction {
+    pub name: String,
+    pub description: String,
+    pub parameters: Value,
+}
+
+impl From<McpTool> for OpenAITool {
+    fn from(mcp_tool: McpTool) -> Self {
+        Self {
+            tool_type: "function".to_string(),
+            function: OpenAIFunction {
+                name: mcp_tool.name,
+                description: mcp_tool.description,
+                parameters: mcp_tool.input_schema,
+            },
+        }
+    }
 }
 
 /// MCP tools list result

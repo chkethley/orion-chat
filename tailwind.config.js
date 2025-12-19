@@ -10,12 +10,12 @@ export default {
       colors: {
         border: 'rgba(255, 255, 255, 0.08)',
         input: 'rgba(255, 255, 255, 0.08)',
-        ring: '#3dd2c3',
+        ring: '#4aa3ff',
         background: '#05070f',
         foreground: '#e7edf6',
         primary: {
-          DEFAULT: '#3dd2c3',
-          foreground: '#031b18',
+          DEFAULT: '#4aa3ff',
+          foreground: '#061a2c',
         },
         secondary: {
           DEFAULT: '#0e1628',

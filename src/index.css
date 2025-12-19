@@ -21,8 +21,8 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     background:
-      radial-gradient(circle at 18% 18%, rgba(61, 210, 195, 0.18), transparent 32%),
-      radial-gradient(circle at 82% 6%, rgba(248, 191, 107, 0.16), transparent 30%),
+      radial-gradient(circle at 18% 18%, rgba(74, 163, 255, 0.18), transparent 32%),
+      radial-gradient(circle at 82% 6%, rgba(45, 226, 166, 0.16), transparent 30%),
       radial-gradient(circle at 50% 78%, rgba(80, 150, 255, 0.12), transparent 26%),
       linear-gradient(135deg, #05070f 0%, #060c1a 50%, #03060d 100%);
     letter-spacing: 0.01em;
@@ -33,7 +33,7 @@
   }
 }
 
-/* Custom scrollbar for dark theme with purple accent */
+/* Custom scrollbar for dark theme with blue accent */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -44,18 +44,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3dd2c3;
+  background: #4aa3ff;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4ae0d0;
+  background: #78beff;
 }
 
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3dd2c3 #0b101c;
+  scrollbar-color: #4aa3ff #0b101c;
 }
 
 /* Code block styling for syntax highlighting */
@@ -203,6 +203,6 @@ textarea:focus {
 }
 
 ::selection {
-  background: rgba(61, 210, 195, 0.25);
+  background: rgba(74, 163, 255, 0.25);
   color: #e7edf6;
 }

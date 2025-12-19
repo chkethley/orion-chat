@@ -95,7 +95,7 @@ export function Header() {
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
-              className="min-w-[260px] justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-left shadow-[0_15px_40px_rgba(0,0,0,0.35)] hover:border-primary/40 hover:bg-primary/5"
+              className="min-w-[260px] h-auto min-h-[56px] justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 text-left shadow-[0_15px_40px_rgba(0,0,0,0.35)] hover:border-primary/40 hover:bg-primary/5"
             >
               <div className="flex flex-col text-left">
                 <span className="text-xs uppercase tracking-[0.1em] text-muted-foreground">

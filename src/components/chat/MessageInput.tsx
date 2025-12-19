@@ -70,7 +70,7 @@ export function MessageInput({ conversationId }: MessageInputProps) {
               onClick={handleSubmit}
               disabled={!input.trim()}
               size="icon"
-              className="h-[64px] w-14 rounded-xl bg-gradient-to-br from-primary via-primary to-[#f8bf6b] text-[#031b18] shadow-[0_15px_40px_rgba(61,210,195,0.35)] hover:brightness-110"
+              className="h-[64px] w-14 rounded-xl bg-gradient-to-br from-primary via-primary to-[#2de2a6] text-[#061a2c] shadow-[0_15px_40px_rgba(74,163,255,0.35)] hover:brightness-110"
             >
               <Send className="h-5 w-5" />
             </Button>

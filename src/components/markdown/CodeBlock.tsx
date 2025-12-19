@@ -18,10 +18,18 @@ export function CodeBlock({ language, value }: CodeBlockProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Highlight the code
-  const highlightedCode = language
-    ? hljs.highlight(value, { language }).value
-    : hljs.highlightAuto(value).value;
+  const safeLanguage =
+    language && hljs.getLanguage(language) ? language : undefined;
+
+  // Highlight the code with a safe fallback for unknown languages.
+  let highlightedCode = '';
+  try {
+    highlightedCode = safeLanguage
+      ? hljs.highlight(value, { language: safeLanguage, ignoreIllegals: true }).value
+      : hljs.highlightAuto(value).value;
+  } catch (error) {
+    highlightedCode = hljs.highlightAuto(value).value;
+  }
 
   return (
     <div className="group relative my-4">
@@ -53,7 +61,7 @@ export function CodeBlock({ language, value }: CodeBlockProps) {
       {/* Code content */}
       <pre className="!mt-0 overflow-x-auto rounded-b-md bg-[#1a1a1a] p-4">
         <code
-          className={`language-${language || 'plaintext'}`}
+          className={`language-${safeLanguage || 'plaintext'}`}
           dangerouslySetInnerHTML={{ __html: highlightedCode }}
         />
       </pre>

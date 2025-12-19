@@ -23,7 +23,7 @@ export function Message({ message }: MessageProps) {
         className={cn(
           'flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-2xl border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.35)]',
           isUser
-            ? 'bg-gradient-to-br from-primary via-primary to-[#f8bf6b] text-primary-foreground'
+            ? 'bg-gradient-to-br from-primary via-primary to-[#2de2a6] text-primary-foreground'
             : 'bg-white/5 text-foreground'
         )}
       >
@@ -39,7 +39,7 @@ export function Message({ message }: MessageProps) {
         className={cn(
           'relative max-w-[78%] rounded-2xl border px-4 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl',
           isUser
-            ? 'border-primary/30 bg-gradient-to-br from-primary/90 via-primary to-[#f8bf6b]/60 text-[#031915]'
+            ? 'border-primary/30 bg-gradient-to-br from-primary/90 via-primary to-[#2de2a6]/60 text-[#061a2c]'
             : 'border-white/10 bg-white/5 text-foreground'
         )}
       >

@@ -11,7 +11,7 @@ export function AppLayout({ children }: AppLayoutProps) {
     <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-[#05070f] via-[#060c1a] to-[#02040a] text-foreground">
       <div className="pointer-events-none absolute inset-0 opacity-70">
         <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-primary/25 blur-[120px]" />
-        <div className="absolute right-[-120px] top-10 h-80 w-80 rounded-full bg-[#f8bf6b]/18 blur-[140px]" />
+        <div className="absolute right-[-120px] top-10 h-80 w-80 rounded-full bg-[#2de2a6]/18 blur-[140px]" />
         <div className="absolute bottom-[-160px] left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-[#4aa3ff]/12 blur-[160px]" />
       </div>
 

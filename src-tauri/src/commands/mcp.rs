@@ -1,7 +1,7 @@
 use serde_json::Value;
 use tauri::State;
 
-use crate::mcp::{CallToolResult, McpServerConfig, McpServerManager, McpTool};
+use crate::mcp::{CallToolResult, McpServerConfig, McpServerManager, McpTool, OpenAITool};
 
 /// Start a new MCP server
 #[tauri::command]
@@ -33,16 +33,19 @@ pub async fn list_mcp_servers(state: State<'_, McpServerManager>) -> Result<Vec<
     Ok(state.list_servers().await)
 }
 
-/// List tools from a specific MCP server
+/// List tools from a specific MCP server (returns OpenAI-compatible format)
 #[tauri::command]
 pub async fn list_mcp_tools(
     state: State<'_, McpServerManager>,
     server_id: String,
-) -> Result<Vec<McpTool>, String> {
-    state
+) -> Result<Vec<OpenAITool>, String> {
+    let mcp_tools = state
         .list_tools(&server_id)
         .await
-        .map_err(|e| e.to_string())
+        .map_err(|e| e.to_string())?;
+
+    // Convert MCP tools to OpenAI format
+    Ok(mcp_tools.into_iter().map(|tool| tool.into()).collect())
 }
 
 /// Call a tool on a specific MCP server
