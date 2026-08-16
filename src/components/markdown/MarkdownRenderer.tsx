@@ -13,11 +13,11 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           // Code blocks
-          code({ node, inline, className, children, ...props }) {
+          code({ node, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             const codeContent = String(children).replace(/\n$/, '');
 
-            if (!inline && match) {
+            if (match) {
               return <CodeBlock language={match[1]} value={codeContent} />;
             }
 

@@ -107,7 +107,7 @@ export function McpServerList() {
               {tools.length > 0 && (
                 <div className="text-xs text-muted-foreground pt-2 border-t border-border">
                   <span className="font-medium">{tools.length} tools:</span>{' '}
-                  {tools.map((t) => t.name).join(', ')}
+                  {tools.map((tool) => tool.function.name).join(', ')}
                 </div>
               )}
             </div>
