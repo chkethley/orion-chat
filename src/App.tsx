@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { AppLayout } from './components/layout/AppLayout';
 import { ChatArea } from './components/chat/ChatArea';
 import { KeyboardShortcutsDialog } from './components/settings/KeyboardShortcutsDialog';
@@ -9,7 +9,7 @@ import { useSettingsStore } from './stores/settingsStore';
 
 function App() {
   const [showShortcuts, setShowShortcuts] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
+  const [, setShowSettings] = useState(false);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const messageInputRef = useRef<HTMLTextAreaElement | null>(null);
 

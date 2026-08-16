@@ -92,8 +92,6 @@ export class OpenRouterService {
   ): Promise<void> {
     try {
       let fullContent = '';
-      const toolCalls: any[] = [];
-
       for await (const chunk of this.streamChatCompletion(messages, model, tools)) {
         // Check if aborted
         if (options.signal?.aborted) {

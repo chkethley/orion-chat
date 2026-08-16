@@ -28,7 +28,7 @@ export function useStreaming() {
 
   const findServerForTool = useCallback((toolName: string): string | null => {
     for (const [serverId, serverTools] of tools.entries()) {
-      if (serverTools.some((tool) => tool.name === toolName)) {
+      if (serverTools.some((tool) => tool.function.name === toolName)) {
         return serverId;
       }
     }
